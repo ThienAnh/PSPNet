@@ -1,0 +1,17 @@
+train_net: "models/pspnet101_VOC2012_train.prototxt"
+test_interval: 100
+base_lr: 0.00499999988824
+display: 100
+max_iter: 200000
+lr_policy: "poly"
+gamma: 0.10000000149
+momentum: 0.899999976158
+weight_decay: 9.99999974738e-05
+stepsize: 20000
+snapshot: 2000
+snapshot_prefix: "jobs/pascal_voc/pspnet101_default/snapshots/pspnet101_default"
+solver_mode: GPU
+regularization_type: "L2"
+iter_size: 1
+snapshot_format: BINARYPROTO
+type: "SGD"
