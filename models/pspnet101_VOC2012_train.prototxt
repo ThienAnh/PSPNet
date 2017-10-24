@@ -11,7 +11,7 @@ layer {
   }
   transform_param {
     mirror: true
-    crop_size: 473
+    crop_size: 377
     mean_value: 104.008
     mean_value: 116.669
     mean_value: 122.675
@@ -6800,8 +6800,8 @@ layer {
   top: "conv5_3_pool1"
   pooling_param {
     pool: AVE
-    kernel_size: 60
-    stride: 60
+    kernel_size: 48
+    stride: 48
   }
 }
 layer {
@@ -6869,8 +6869,8 @@ layer {
   bottom: "conv5_3_pool1_conv"
   top: "conv5_3_pool1_interp"
   interp_param {
-    height: 60
-    width: 60
+    height: 48
+    width: 48
   }
 }
 layer {
@@ -6880,8 +6880,8 @@ layer {
   top: "conv5_3_pool2"
   pooling_param {
     pool: AVE
-    kernel_size: 30
-    stride: 30
+    kernel_size: 24
+    stride: 24
   }
 }
 layer {
@@ -6949,8 +6949,8 @@ layer {
   bottom: "conv5_3_pool2_conv"
   top: "conv5_3_pool2_interp"
   interp_param {
-    height: 60
-    width: 60
+    height: 48
+    width: 48
   }
 }
 layer {
@@ -6960,8 +6960,8 @@ layer {
   top: "conv5_3_pool3"
   pooling_param {
     pool: AVE
-    kernel_size: 20
-    stride: 20
+    kernel_size: 16
+    stride: 16
   }
 }
 layer {
@@ -7029,8 +7029,8 @@ layer {
   bottom: "conv5_3_pool3_conv"
   top: "conv5_3_pool3_interp"
   interp_param {
-    height: 60
-    width: 60
+    height: 48
+    width: 48
   }
 }
 layer {
@@ -7040,8 +7040,8 @@ layer {
   top: "conv5_3_pool6"
   pooling_param {
     pool: AVE
-    kernel_size: 10
-    stride: 10
+    kernel_size: 8
+    stride: 8
   }
 }
 layer {
@@ -7109,8 +7109,8 @@ layer {
   bottom: "conv5_3_pool6_conv"
   top: "conv5_3_pool6_interp"
   interp_param {
-    height: 60
-    width: 60
+    height: 48
+    width: 48
   }
 }
 layer {
