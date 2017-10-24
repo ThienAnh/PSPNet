@@ -7166,3 +7166,16 @@ layer {
     zoom_factor: 8
   }
 }
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "conv6_interp"
+  bottom: "label"
+  top: "loss"
+  include {
+    phase: TRAIN
+  }
+  loss_param {
+    ignore_label: 255
+  }
+}
