@@ -24,8 +24,8 @@ layer {
     scale_factors: 2.0
   }
   image_data_param {
-    root_folder: "/home/ubuntu/VOCdevkit/VOC2012"
-    source: "/home/ubuntu/ThienAnh/PSPNet/splits/pascal_voc_train_aug.txt"
+    root_folder: "/home/ubuntu/PixelzData/Data"
+    source: "/home/ubuntu/ThienAnh/PSPNet/splits/train.txt"
     batch_size: 2
     shuffle: true
     label_type: PIXEL
