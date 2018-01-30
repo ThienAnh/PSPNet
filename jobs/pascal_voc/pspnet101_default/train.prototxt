@@ -11,7 +11,7 @@ layer {
   }
   transform_param {
     mirror: true
-    crop_size: 137
+    crop_size: 377
     mean_value: 104.008
     mean_value: 116.669
     mean_value: 122.675
@@ -24,9 +24,9 @@ layer {
     scale_factors: 2.0
   }
   image_data_param {
-    root_folder: "/home/adminpxz/VOCdevkit/VOC2012"
-    source: "/home/adminpxz/PSPNet/PSPNet/splits/pascal_voc_train_aug.txt"
-    batch_size: 1
+    root_folder: "/home/ubuntu/PixelzData/NewData"
+    source: "/home/ubuntu/ThienAnh/PSPNet/splits/train.txt"
+    batch_size: 2
     shuffle: true
     label_type: PIXEL
   }
@@ -2098,63 +2098,6 @@ layer {
   bottom: "conv4_2"
   top: "conv4_2"
 }
-############################################################################
-# Auxiliary loss.
-############################################################################
-layer {
-  name: "conv_aux"
-  type: "Convolution"
-  bottom: "conv4_2"
-  top: "conv_aux"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  convolution_param {
-    num_output: 21
-    kernel_size: 1
-    stride: 1
-    weight_filler {
-      type: "msra"
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
-  name: "conv_aux_interp"
-  type: "Interp"
-  bottom: "conv_aux"
-  top: "conv_aux_interp_interp"
-  interp_param {
-    zoom_factor: 8
-  }
-}
-
-layer {
-  name: "loss_aux"
-  type: "SoftmaxWithLoss"
-  bottom: "conv_aux_interp_interp"
-  bottom: "label"
-  top: "loss_aux"
-  include {
-    phase: TRAIN
-  }
-  loss_param {
-    ignore_label: 255
-    
-  }
-  loss_weight: 0.4
-}
-
-############################################################################
-
 layer {
   name: "conv4_3_1x1_reduce"
   type: "Convolution"
@@ -6800,8 +6743,8 @@ layer {
   top: "conv5_3_pool1"
   pooling_param {
     pool: AVE
-    kernel_size: 18
-    stride: 18
+    kernel_size: 48
+    stride: 48
   }
 }
 layer {
@@ -6869,8 +6812,8 @@ layer {
   bottom: "conv5_3_pool1_conv"
   top: "conv5_3_pool1_interp"
   interp_param {
-    height: 18
-    width: 18
+    height: 48
+    width: 48
   }
 }
 layer {
@@ -6880,8 +6823,8 @@ layer {
   top: "conv5_3_pool2"
   pooling_param {
     pool: AVE
-    kernel_size: 9
-    stride: 9
+    kernel_size: 24
+    stride: 24
   }
 }
 layer {
@@ -6949,8 +6892,8 @@ layer {
   bottom: "conv5_3_pool2_conv"
   top: "conv5_3_pool2_interp"
   interp_param {
-    height: 18
-    width: 18
+    height: 48
+    width: 48
   }
 }
 layer {
@@ -6960,8 +6903,8 @@ layer {
   top: "conv5_3_pool3"
   pooling_param {
     pool: AVE
-    kernel_size: 6
-    stride: 6
+    kernel_size: 16
+    stride: 16
   }
 }
 layer {
@@ -7029,8 +6972,8 @@ layer {
   bottom: "conv5_3_pool3_conv"
   top: "conv5_3_pool3_interp"
   interp_param {
-    height: 18
-    width: 18
+    height: 48
+    width: 48
   }
 }
 layer {
@@ -7040,8 +6983,8 @@ layer {
   top: "conv5_3_pool6"
   pooling_param {
     pool: AVE
-    kernel_size: 3
-    stride: 3
+    kernel_size: 8
+    stride: 8
   }
 }
 layer {
@@ -7109,8 +7052,8 @@ layer {
   bottom: "conv5_3_pool6_conv"
   top: "conv5_3_pool6_interp"
   interp_param {
-    height: 18
-    width: 18
+    height: 48
+    width: 48
   }
 }
 layer {
@@ -7212,10 +7155,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
   }
 }
 layer {
@@ -7227,7 +7166,6 @@ layer {
     zoom_factor: 8
   }
 }
-
 layer {
   name: "loss"
   type: "SoftmaxWithLoss"
@@ -7240,4 +7178,14 @@ layer {
   loss_param {
     ignore_label: 255
   }
+}
+layer{
+name: "accuracy"
+type: "SegAccuracy"
+bottom: "conv6_interp"
+bottom: "label"
+top: "accuracy"
+seg_accuracy_param{
+ignore_label:255
+}
 }
